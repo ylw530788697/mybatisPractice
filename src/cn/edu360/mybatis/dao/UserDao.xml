@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 该文件代表的是user类和user表的映射关系，关于user表的sql语句等等写在这里 -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu360.mybatis.dao.UserDao">
+<!-- #{}代表占位符？，表示mybatis框架会接收输入的参数并赋值到sql语句当中
+      关于简单类型(int,String,date。long)可以使用value来代表参数名
+ -->
+    <resultMap id="userMap" type="cn.edu360.mybatis.model.UserModel" >
+        <id property="userId" column="user_id"/>
+        <result property="userName" column="username"/>
+        <result property="age" column="age"/>
+        <result property="passWord" column="password"/>
+        <association property="" column="">
+
+        </association>
+    </resultMap>
+    <select id="findUserByUsernameAndPassword" parameterType="userModel" resultMap="userMap">
+   select * from userModel where username =#{userName} and password =#{passWord}
+ </select>
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 该文件代表的是user类和user表的映射关系，关于user表的sql语句等等写在这里 -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu360.mybatis.dao.ItemsDao">
+    <!-- #{}代表占位符？，表示mybatis框架会接收输入的参数并赋值到sql语句当中
+          关于简单类型(int,String,date。long)可以使用value来代表参数名
+     -->
+    <resultMap id="itemsMap" type="cn.edu360.mybatis.model.ItemsModel">
+        <id property="itemsId" column="items_id"/>
+        <result property="itemsName" column="items_name"/>
+        <result property="price" column="price"/>
+    </resultMap>
+    <select id="queryItemsByNameAndPrice" parameterType="cn.edu360.mybatis.model.ItemsModel"
+            resultMap="itemsMap">
+        select * from items
+        <where>
+            <if test="itemsName !=null and itemsName!=''">
+                and items_name LIKE CONCAT('%',#{itemsName},'%')
+            </if>
+            <if test="price !=null and price!=''">
+                and price LIKE CONCAT('%',#{price},'%')
+            </if>
+        </where>
+    </select>
+
+</mapper>
