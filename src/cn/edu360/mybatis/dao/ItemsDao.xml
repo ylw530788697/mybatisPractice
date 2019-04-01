@@ -16,12 +16,7 @@
             resultMap="itemsMap">
         select * from items
         <where>
-            <if test="itemsName !=null and itemsName!=''">
-                and items_name LIKE CONCAT('%',#{itemsName},'%')
-            </if>
-            <if test="price !=null and price!=''">
-                and price LIKE CONCAT('%',#{price},'%')
-            </if>
+            <include refid="items_query"/>
         </where>
     </select>
 
@@ -33,5 +28,14 @@
             </foreach>
         </where>
     </delete>
+
+    <sql id="items_query">
+        <if test="itemsName !=null and itemsName!=''">
+            and items_name LIKE CONCAT('%',#{itemsName},'%')
+        </if>
+        <if test="price !=null and price!=''">
+            and price LIKE CONCAT('%',#{price},'%')
+        </if>
+    </sql>
 
 </mapper>
