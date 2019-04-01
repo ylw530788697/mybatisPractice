@@ -7,7 +7,9 @@ import org.junit.Test;
 
 
 import java.util.Scanner;
-
+/**
+ * @author EvanYang
+ */
 public class UserTest {
     @Test
     public void test()

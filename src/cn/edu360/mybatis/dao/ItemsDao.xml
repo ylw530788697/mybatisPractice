@@ -25,4 +25,13 @@
         </where>
     </select>
 
+    <delete id="deleteItems" parameterType="cn.edu360.mybatis.model.responseModel.ItemsListResModel">
+        delete from items
+        <where>
+            <foreach collection="integerList" open="items_id in (" close=")" item="id" separator=",">
+                #{id,jdbcType=INTEGER}
+            </foreach>
+        </where>
+    </delete>
+
 </mapper>

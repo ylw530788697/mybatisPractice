@@ -1,5 +1,7 @@
 package cn.edu360.mybatis.model;
-
+/**
+ * @author EvanYang
+ */
 public class UserModel {
     private Integer userId;
 

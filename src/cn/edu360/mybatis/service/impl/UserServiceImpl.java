@@ -7,7 +7,9 @@ import cn.edu360.mybatis.util.MybatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-
+/**
+ * @author EvanYang
+ */
 public class UserServiceImpl implements UserService {
     @Override
     public UserModel findUserByUsernameAndPassword(UserModel userModel) {
