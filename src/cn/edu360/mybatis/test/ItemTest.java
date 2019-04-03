@@ -31,6 +31,5 @@ public class ItemTest {
         itemsListResModel.setIntegerList(integerList);
         ItemsService itemsService=new ItemsServiceImpl();
         itemsService.deleteItems(itemsListResModel);
-
     }
 }

@@ -7,6 +7,7 @@
         <id column="orders_id" jdbcType="INTEGER" property="ordersId"></id>
         <result column="count" jdbcType="INTEGER" property="count"></result>
         <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="userId" jdbcType="INTEGER" property="user_id"/>
         <association property="userModel" javaType="cn.edu360.mybatis.model.UserModel">
             <id  property="userId" column="user_id" jdbcType="INTEGER"/>
             <collection  property="userName"  column="username" jdbcType="INTEGER"/>
