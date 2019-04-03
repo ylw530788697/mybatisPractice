@@ -22,16 +22,16 @@
         SELECT
             orders.orders_id,
             orders.count,
-            orders.`status`,
-            `user`.user_id,
-            `user`.username,
-            `user`.age,
-            `user`.`password`
+            orders.status,
+            user.user_id,
+            user.username,
+            user.age,
+            user.password
         FROM
             orders,
-            `user`
+            user
         WHERE
-            orders.user_id = `user`.user_id
+            orders.user_id = user.user_id
             and orders.orders_id=#{ordersId}
     </select>
 

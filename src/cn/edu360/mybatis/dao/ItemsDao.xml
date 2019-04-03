@@ -12,11 +12,6 @@
         <result property="itemsName" column="items_name"/>
         <result property="price" column="price"/>
     </resultMap>
-    <resultMap id="queryOrdersListMap" type="cn.edu360.mybatis.model.ItemsModel" extends="itemsMap">
-        <association property="userModel" >
-
-        </association>
-    </resultMap>
     <sql id="Base_Column_List">
       orders_id,count,status,user_id
     </sql>
@@ -45,11 +40,6 @@
             </foreach>
         </where>
     </delete>
-    <select id="queryOrdersList" resultMap="queryOrdersListMap">
-
-    </select>
-
-  
     
 
 </mapper>
