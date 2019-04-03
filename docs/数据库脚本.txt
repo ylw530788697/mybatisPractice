@@ -1,0 +1,61 @@
+CREATE DATABASE 
+
+USE `test`;
+
+CREATE TABLE `items` (
+  `items_id` int(11) NOT NULL AUTO_INCREMENT,
+  `items_name` varchar(255) DEFAULT NULL,
+  `price` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`items_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `orders` (
+  `orders_id` int(11) NOT NULL AUTO_INCREMENT,
+  `count` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`orders_id`),
+  KEY `Fk_orders` (`user_id`),
+  CONSTRAINT `Fk_orders` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `orders_items_relation` (
+  `orders_id` int(11) DEFAULT NULL,
+  `items_id` int(11) DEFAULT NULL,
+  KEY `FK_orders_items_relation` (`orders_id`),
+  KEY `FK_orders_items_relation_items_id` (`items_id`),
+  CONSTRAINT `FK_orders_items_relation_items_id` FOREIGN KEY (`items_id`) REFERENCES `items` (`items_id`),
+  CONSTRAINT `FK_orders_items_relation` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`orders_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `test`.`items` (`items_id`, `items_name`, `price`) VALUES ('1', 'oppo', '3000');
+INSERT INTO `test`.`items` (`items_id`, `items_name`, `price`) VALUES ('2', 'one+', '4000');
+INSERT INTO `test`.`items` (`items_id`, `items_name`, `price`) VALUES ('3', 'huawei', '8000');
+INSERT INTO `test`.`items` (`items_id`, `items_name`, `price`) VALUES ('4', 'appple', '8000');
+
+
+INSERT INTO `test`.`orders` (`orders_id`, `count`, `status`, `user_id`) VALUES ('1', '2', '1', '1');
+INSERT INTO `test`.`orders` (`orders_id`, `count`, `status`, `user_id`) VALUES ('2', '2', '0', '2');
+
+
+INSERT INTO `test`.`orders_items_relation` (`orders_id`, `items_id`) VALUES ('1', '1');
+INSERT INTO `test`.`orders_items_relation` (`orders_id`, `items_id`) VALUES ('1', '2');
+INSERT INTO `test`.`orders_items_relation` (`orders_id`, `items_id`) VALUES ('2', '2');
+INSERT INTO `test`.`orders_items_relation` (`orders_id`, `items_id`) VALUES ('2', '3');
+
+
+INSERT INTO `test`.`user` (`user_id`, `username`, `age`, `password`) VALUES ('1', '张三丰', '18', '11');
+INSERT INTO `test`.`user` (`user_id`, `username`, `age`, `password`) VALUES ('2', '李蛋蛋', '18', '123');
