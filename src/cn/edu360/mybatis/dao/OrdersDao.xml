@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu360.mybatis.dao.OrdersDao">
+    <resultMap id="queryOrdersListMap" type="cn.edu360.mybatis.model.OrdersModel">
+        <id column="orders_id" jdbcType="INTEGER" property="ordersId"></id>
+        <result column="count" jdbcType="INTEGER" property="count"></result>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <association property="userModel" javaType="cn.edu360.mybatis.model.UserModel">
+            <id  property="userId" column="user_id" jdbcType="INTEGER"/>
+            <collection  property="userName"  column="username" jdbcType="INTEGER"/>
+            <collection property="age" column="age" jdbcType="INTEGER"/>
+            <collection property="passWord" column="password" jdbcType="INTEGER"/>
+        </association>
+    </resultMap>
+    <sql id="Base_Column_List">
+      orders_id,count,status,user_id
+    </sql>
+
+    <select id="queryOrdersList" resultMap="queryOrdersListMap" parameterType="java.lang.Integer">
+        SELECT
+            orders.orders_id,
+            orders.count,
+            orders.`status`,
+            `user`.user_id,
+            `user`.username,
+            `user`.age,
+            `user`.`password`
+        FROM
+            orders,
+            `user`
+        WHERE
+            orders.user_id = `user`.user_id
+            and orders.orders_id=#{ordersId}
+    </select>
+
+
+</mapper>

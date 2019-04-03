@@ -12,6 +12,23 @@
         <result property="itemsName" column="items_name"/>
         <result property="price" column="price"/>
     </resultMap>
+    <resultMap id="queryOrdersListMap" type="cn.edu360.mybatis.model.ItemsModel" extends="itemsMap">
+        <association property="userModel" >
+
+        </association>
+    </resultMap>
+    <sql id="Base_Column_List">
+      orders_id,count,status,user_id
+    </sql>
+    <sql id="items_query">
+        <if test="itemsName !=null and itemsName!=''">
+            and items_name LIKE CONCAT('%',#{itemsName},'%')
+        </if>
+        <if test="price !=null and price!=''">
+            and price LIKE CONCAT('%',#{price},'%')
+        </if>
+    </sql>
+
     <select id="queryItemsByNameAndPrice" parameterType="cn.edu360.mybatis.model.ItemsModel"
             resultMap="itemsMap">
         select * from items
@@ -28,14 +45,11 @@
             </foreach>
         </where>
     </delete>
+    <select id="queryOrdersList" resultMap="queryOrdersListMap">
 
-    <sql id="items_query">
-        <if test="itemsName !=null and itemsName!=''">
-            and items_name LIKE CONCAT('%',#{itemsName},'%')
-        </if>
-        <if test="price !=null and price!=''">
-            and price LIKE CONCAT('%',#{price},'%')
-        </if>
-    </sql>
+    </select>
+
+  
+    
 
 </mapper>
