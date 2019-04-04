@@ -7,6 +7,8 @@ import cn.edu360.mybatis.util.MybatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import java.util.List;
+
 /**
  * @author EvanYang
  */
@@ -18,5 +20,14 @@ public class UserServiceImpl implements UserService {
         UserDao userDao=session.getMapper(UserDao.class);
         UserModel userByUserModelNameAndPassword = userDao.findUserByUsernameAndPassword(userModel);
         return userByUserModelNameAndPassword;
+    }
+
+    @Override
+    public List<UserModel> findUserOrdersList(Integer userId) {
+        SqlSessionFactory factory = MybatisUtil.getFactory();
+        SqlSession session = factory.openSession();
+        UserDao userDao=session.getMapper(UserDao.class);
+        List<UserModel> userOrdersList = userDao.findUserOrdersList(userId);
+        return  userOrdersList;
     }
 }

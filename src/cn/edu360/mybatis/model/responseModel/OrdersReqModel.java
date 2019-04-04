@@ -1,11 +1,13 @@
-package cn.edu360.mybatis.model;
+package cn.edu360.mybatis.model.responseModel;
 
-public class OrdersModel {
+import cn.edu360.mybatis.model.UserModel;
+
+public class OrdersReqModel {
     private Integer ordersId;
     private Integer count;
     private Integer status;
     private Integer userId;
-
+    private UserModel userModel;
 
     @Override
     public String toString() {
@@ -14,6 +16,7 @@ public class OrdersModel {
                 ", count=" + count +
                 ", status=" + status +
                 ", userId=" + userId +
+                ", userModel=" + userModel +
                 '}';
     }
 
@@ -47,5 +50,13 @@ public class OrdersModel {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public UserModel getUserModel() {
+        return userModel;
+    }
+
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
     }
 }

@@ -1,4 +1,7 @@
 package cn.edu360.mybatis.model;
+
+import java.util.List;
+
 /**
  * @author EvanYang
  */
@@ -10,6 +13,16 @@ public class UserModel {
     private Integer age;
 
     private String passWord;
+
+    private List<OrdersModel> ordersModelList;
+
+    public List<OrdersModel> getOrdersModelList() {
+        return ordersModelList;
+    }
+
+    public void setOrdersModelList(List<OrdersModel> ordersModelList) {
+        this.ordersModelList = ordersModelList;
+    }
 
     @Override
     public String toString() {

@@ -6,6 +6,7 @@ import cn.edu360.mybatis.service.impl.UserServiceImpl;
 import org.junit.Test;
 
 
+import java.util.List;
 import java.util.Scanner;
 /**
  * @author EvanYang
@@ -14,16 +15,16 @@ public class UserTest {
     @Test
     public void test()
     {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("请输入用户名:");
-        String userName=scanner.nextLine();
-        System.out.println("请入密码:");
-        String passWord=scanner.nextLine();
+        //Scanner scanner = new Scanner(System.in);
+        //System.out.println("请输入用户名:");
+        //String userName=scanner.nextLine();
+        //System.out.println("请入密码:");
+        //String passWord=scanner.nextLine();
         UserModel userModel =new UserModel();
-        userModel.setUserName(userName);
-        userModel.setPassWord(passWord);
-        //userModel.setUserName("zhangsan");
-        //userModel.setPassWord("11");
+        //userModel.setUserName(userName);
+        //userModel.setPassWord(passWord);
+        userModel.setUserName("zhangsan");
+        userModel.setPassWord("11");
         UserService userService=new UserServiceImpl();
         UserModel userByUserModelNameAndPassword = userService.findUserByUsernameAndPassword(userModel);
         if (userByUserModelNameAndPassword !=null){
@@ -31,5 +32,11 @@ public class UserTest {
         }else{
             System.out.println("用户名错误");
         }
+    }
+    @Test
+    public void test2(){
+        UserService userService=new UserServiceImpl();
+        List<UserModel> userOrdersList = userService.findUserOrdersList(1);
+        System.out.println(userOrdersList);
     }
 }

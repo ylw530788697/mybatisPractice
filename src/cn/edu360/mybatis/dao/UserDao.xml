@@ -4,20 +4,42 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu360.mybatis.dao.UserDao">
-<!-- #{}代表占位符？，表示mybatis框架会接收输入的参数并赋值到sql语句当中
-      关于简单类型(int,String,date。long)可以使用value来代表参数名
- -->
-    <resultMap id="userMap" type="cn.edu360.mybatis.model.UserModel" >
+    <!-- #{}代表占位符？，表示mybatis框架会接收输入的参数并赋值到sql语句当中
+          关于简单类型(int,String,date。long)可以使用value来代表参数名
+     -->
+    <resultMap id="userMap" type="cn.edu360.mybatis.model.UserModel">
         <id property="userId" column="user_id"/>
         <result property="userName" column="username"/>
         <result property="age" column="age"/>
         <result property="passWord" column="password"/>
-        <association property="" column="">
-
-        </association>
+    </resultMap>
+    <resultMap id="findUserOrdersListMap" type="cn.edu360.mybatis.model.UserModel" extends="userMap">
+        <collection property="ordersModelList" ofType="cn.edu360.mybatis.model.OrdersModel">
+            <id property="ordersId" column="orders_id"/>
+            <result property="count" jdbcType="INTEGER" column="count"/>
+            <result property="status" jdbcType="INTEGER" column="status"/>
+        </collection>
     </resultMap>
     <select id="findUserByUsernameAndPassword" parameterType="userModel" resultMap="userMap">
-   select * from userModel where username =#{userName} and password =#{passWord}
- </select>
+           select * from user where username =#{userName} and password =#{passWord}
+    </select>
+    
+    <select id="findUserOrdersList" parameterType="java.lang.Integer" resultMap="findUserOrdersListMap">
+        SELECT
+            USER .user_id,
+            USER .username,
+            USER .age,
+            USER .PASSWORD,
+            orders.user_id,
+            orders.count,
+            orders.orders_id,
+            orders.STATUS
+        FROM
+            USER,
+            orders
+        WHERE
+            USER.user_id = orders.user_id
+            and user.user_id=#{userId}
+    </select>
 
 </mapper>
