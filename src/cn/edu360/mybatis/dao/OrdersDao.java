@@ -8,5 +8,5 @@ import java.util.List;
 public interface OrdersDao {
     public List<OrdersModel> queryOrdersList(@Param("ordersId") Integer ordersId);
 
-    public void  se();
+    public void  se(String  aa); 
 }
